@@ -8,4 +8,4 @@ YamAdam is a fast convergent optimizer incorporating unit correction system and 
 THEANO_FLAGS=mode=FAST_RUN,device=cpu,floatX=float32 ./theano-optimizer.py
 
 ## Reference
-Yamada KD, Hyperparameter-free optimizer of gradient-descent method incorporating unit correction and moment estimation, bioRxiv, 348557, 2018
+Yamada KD, Adaptive Optimization without User-Specified Optimizer Hyperparameters through Historical-Only Projection and Self-Calibrated Update Scaling, bioRxiv, 2026
