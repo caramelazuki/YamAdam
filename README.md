@@ -25,4 +25,4 @@ YamAdam computes the required gradients inside `optimizer.step`. Do not call `op
 The complete standalone implementation is provided in [`yamadam.py`](yamadam.py). The conditions used for the paper's fixed-setting comparison are recorded in [`EXPERIMENT.md`](EXPERIMENT.md).
 
 ## Reference
-Yamada KD, Adaptive Optimization without User-Specified Optimizer Hyperparameters through Historical Projection and Self-Calibrated Scaling, bioRxiv, 2026
+Yamada KD, An Adaptive Optimizer without User-Specified Hyperparameters through Historical Projection and Self-Calibrated Scaling, bioRxiv, 2026
