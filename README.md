@@ -1,8 +1,5 @@
 # YamAdam
-**Ya**mada **m**odified **Adam**
-
-## Abstract
-YamAdam is a PyTorch optimizer that requires no user-specified optimizer hyperparameters. It combines moment estimation with historical-only projection, which prevents accumulated history from opposing the current descent direction, and self-calibrated update scaling, which determines the initial update scale from the loss and controls subsequent updates by fixed internal rules.
+YamAdam (**Ya**mada **m**odified **Adam**) is a PyTorch optimizer that requires no user-specified optimizer hyperparameters. It combines moment estimation with historical-only projection, which prevents accumulated history from opposing the current descent direction, and self-calibrated update scaling, which determines the initial update scale from the loss and controls subsequent updates by fixed internal rules.
 
 ## Usage
 ```python
