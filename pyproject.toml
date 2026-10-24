@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "yamadam"
+version = "1.0.0"
+description = "A PyTorch optimizer without user-specified optimizer hyperparameters"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+  {name = "Kazunori D. Yamada"},
+]
+dependencies = [
+  "torch>=2.1",
+]
+
+[project.urls]
+Repository = "https://github.com/caramelazuki/YamAdam"
+
+[tool.setuptools]
+py-modules = ["yamadam"]

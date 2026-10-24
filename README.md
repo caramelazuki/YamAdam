@@ -21,5 +21,11 @@ YamAdam computes the required gradients inside `optimizer.step`. Do not call `op
 
 The complete standalone implementation is provided in [`yamadam.py`](yamadam.py). The conditions used for the paper's fixed-setting comparison are recorded in [`EXPERIMENT.md`](EXPERIMENT.md).
 
+## Installation
+
+```bash
+python -m pip install "git+https://github.com/caramelazuki/YamAdam.git"
+```
+
 ## Reference
 Yamada KD, An Adaptive Optimizer without User-Specified Hyperparameters through Historical Projection and Self-Calibrated Scaling, bioRxiv, 2026
