@@ -28,4 +28,4 @@ python -m pip install "git+https://github.com/caramelazuki/YamAdam.git"
 ```
 
 ## Reference
-Yamada KD, An Adaptive Optimizer without User-Specified Hyperparameters through Historical Projection and Self-Calibrated Scaling, bioRxiv, 2026
+Yamada KD, [An Adaptive Optimizer without User-Specified Hyperparameters through Historical Projection and Self-Calibrated Scaling](https://www.biorxiv.org/content/10.1101/348557v5), bioRxiv, 2026
