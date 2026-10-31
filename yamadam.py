@@ -163,7 +163,6 @@ class ReplayableBatchClosure(BatchClosure):
             self._before_forward = None
             self._after_base_forward = None
 
-from dataclasses import dataclass
 import math
 from typing import ClassVar
 
@@ -695,12 +694,9 @@ class _LinearWeightedCumulativeRMSScale(_CumulativeRMSScaleBase):
 
 
 from collections.abc import Mapping, Sequence
-from dataclasses import InitVar, asdict, dataclass
-import math
+from dataclasses import InitVar, asdict
 from typing import Any, Iterable
 
-import torch
-from torch import Tensor
 from torch.optim import Optimizer
 
 
@@ -772,7 +768,7 @@ class _Direction:
         return 0
 
 
-class YamAdam(Optimizer):
+class _YamAdamCore(Optimizer):
     """Parameter-only optimizer with automatic memory and step scale.
 
     For each coordinate, ``gamma`` is the reciprocal effective history.  If
@@ -3246,14 +3242,7 @@ class YamAdam(Optimizer):
             self._pending_flat_history = None
 
 
-_YamAdamCore = YamAdam
-
-
 from dataclasses import replace
-import math
-
-import torch
-from torch import Tensor
 
 
 
@@ -3295,7 +3284,7 @@ class _CappedMaxGuardedScale(_GuardedInverseSqrtScale):
         return ScaleProposal(radius=radius, updates=updates)
 
 
-class YamAdam(_YamAdamCore):
+class _NeutralMemoryYamAdam(_YamAdamCore):
     """Parameter-only optimizer with neutral memory and a capped-max radius."""
 
     _SCALE_POLICY = _CappedMaxGuardedScale
@@ -3311,18 +3300,6 @@ class YamAdam(_YamAdamCore):
     ) -> Tensor:
         del cls, old_mean, old_second_moment, gradient_square
         return torch.full_like(gradient, 0.5)
-
-
-_NeutralMemoryYamAdam = YamAdam
-
-
-from dataclasses import replace
-import math
-from typing import Any
-
-import torch
-from torch import Tensor
-
 
 
 class _PreviousAgreementGeometricSupportBridgeScale(
@@ -3575,7 +3552,7 @@ class _PreviousAgreementGeometricSupportBridgeScale(
         return result
 
 
-class YamAdam(_NeutralMemoryYamAdam):
+class _ReleaseYamAdam(_NeutralMemoryYamAdam):
     _SCALE_POLICY = _PreviousAgreementGeometricSupportBridgeScale
 
     @staticmethod
@@ -3655,18 +3632,14 @@ class YamAdam(_NeutralMemoryYamAdam):
         return result
 
 
-_ReleaseYamAdam = YamAdam
-
-
-from dataclasses import replace
-import math
-from typing import Any
-
-from torch import Tensor
-
-
-
 class YamAdam(_ReleaseYamAdam):
+    """Parameter-only optimizer with automatic memory and step scale.
+
+    Uses neutral coordinate memory and global history projection, with a
+    self-calibrated capped-max radius, a geometric support release, and an
+    initial-backtrack bracket floor.  See :meth:`step` for the closure contract.
+    """
+
     _PREFIX = "yamadam_initial_backtrack_bracket_floor_"
     _COEFFICIENT = f"{_PREFIX}coefficient"
     _INITIAL_DIRECTION_NORM = f"{_PREFIX}initial_direction_norm"
