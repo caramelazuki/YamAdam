@@ -2,11 +2,14 @@ from __future__ import annotations
 
 __version__ = "1.0.0"
 
-from dataclasses import dataclass
-from typing import Callable
+import math
+from collections.abc import Mapping, Sequence
+from dataclasses import InitVar, asdict, dataclass, replace
+from typing import Any, Callable, ClassVar, Iterable
 
 import torch
 from torch import Tensor
+from torch.optim import Optimizer
 
 
 class BatchClosure:
@@ -163,9 +166,6 @@ class ReplayableBatchClosure(BatchClosure):
             self._before_forward = None
             self._after_base_forward = None
 
-import math
-from typing import ClassVar
-
 
 @dataclass(frozen=True)
 class ScaleProposal:
@@ -295,14 +295,6 @@ class _GuardedInverseSqrtScale:
             "clock_radius": float(group["yamadam_scale_clock_radius"]),
             "relative_radius": float(group["yamadam_scale_relative_radius"]),
         }
-
-
-from collections.abc import Mapping, Sequence
-from dataclasses import InitVar, asdict
-from typing import Any, Iterable
-
-from torch.optim import Optimizer
-
 
 
 @dataclass(frozen=True)
@@ -2846,7 +2838,6 @@ class _YamAdamCore(Optimizer):
             self._pending_flat_history = None
 
 
-from dataclasses import replace
 
 
 
